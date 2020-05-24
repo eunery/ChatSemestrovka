@@ -5,11 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ChatClient"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded" Closing="Window_Closing">
-    <Grid>
-        <TextBox x:Name="tbUserName" HorizontalAlignment="Left" Height="41" Margin="172,10,0,0" TextWrapping="Wrap" Text="User's Name" VerticalAlignment="Top" Width="610" Grid.ColumnSpan="2"/>
-        <Button x:Name="bConDis" Click="Button_Click" Content="Connect" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="147" Height="41"/>
-        <ListBox x:Name="lbChat" HorizontalAlignment="Left" Height="245" Margin="10,68,0,0" VerticalAlignment="Top" Width="772" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="tbMessage" HorizontalAlignment="Left" Height="91" Margin="10,318,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="772" Grid.ColumnSpan="2" KeyDown="tbMessage_KeyDown"/>
+        Title="MainWindow" Height="450" Width="800">
+    <Grid x:Name="gMain">
+        <TextBox x:Name="tbUserName" HorizontalAlignment="Left" Height="43" Margin="172,10,0,0" TextWrapping="Wrap" Text="User's Name" VerticalAlignment="Top" Width="249" FontSize="15" FontFamily="Times New Roman"/>
+        <Button x:Name="bConDis" Click="Button_Click" Content="Connect" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="147" Height="43" Foreground="White" Background="Green" FontSize="25" FontFamily="Times New Roman" />
+        <ListBox x:Name="lbChat" HorizontalAlignment="Left" Height="245" Margin="10,68,0,0" VerticalAlignment="Top" Width="772" Grid.ColumnSpan="2" FontSize="25" FontFamily="Times New Roman"/>
+        <TextBox x:Name="tbMessage" HorizontalAlignment="Left" Height="91" Margin="10,318,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="772" Grid.ColumnSpan="2" KeyDown="tbMessage_KeyDown" FontSize="25" FontFamily="Times New Roman"/>
+        <ComboBox Name="cbBackgroundColors" HorizontalAlignment="Left" Margin="657,34,0,0" VerticalAlignment="Top" Width="113" Height="19" SelectionChanged="cbBackgroundColors_SelectionChanged">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Rectangle Fill="{Binding Name}" Width="16" Height="16" Margin="0,2,5,2" />
+                        <TextBlock Text="{Binding Name}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <Label Content="BackgroundColor" HorizontalAlignment="Left" Margin="657,10,0,0" VerticalAlignment="Top" Width="113" Height="24"/>
     </Grid>
 </Window>

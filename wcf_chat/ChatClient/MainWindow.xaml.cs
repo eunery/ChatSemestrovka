@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,15 +23,14 @@ namespace ChatClient
     /// </summary>
     public partial class MainWindow : Window ,IServiceChatCallback
     {
+        
         bool isConnected = false;
         ServiceChatClient client;
         int ID = 0;
         public MainWindow()
         {
             InitializeComponent();
-        }
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
+            cbBackgroundColors.ItemsSource = typeof(Colors).GetProperties();
         }
         void ConnectUser()
         {
@@ -40,6 +40,7 @@ namespace ChatClient
                 ID = client.Connect(tbUserName.Text);
                 tbUserName.IsEnabled = false;
                 bConDis.Content = "Disconnect";
+                bConDis.Background = Brushes.Red;
                 isConnected = true;
             }
 
@@ -52,6 +53,7 @@ namespace ChatClient
                 client = null;
                 tbUserName.IsEnabled = true;
                 bConDis.Content = "Connect";
+                bConDis.Background = Brushes.Green;
                 isConnected = false;
             }
         }
@@ -88,6 +90,11 @@ namespace ChatClient
                     tbMessage.Text = string.Empty;
                 }
             }
+        }
+        private void cbBackgroundColors_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Color selectedColor = (Color)(cbBackgroundColors.SelectedItem as PropertyInfo).GetValue(null, null);
+            gMain.Background = new SolidColorBrush(selectedColor);
         }
     }
 }
